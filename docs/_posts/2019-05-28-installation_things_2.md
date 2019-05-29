@@ -5,7 +5,7 @@ title: Installation things - 2
 
 ## PX4 and MAVROS
 
-Now that we already have ROS and Gazebo installed and since in this project we do not plan on making any modifications to PX4 and MAVROS, these can directly be installed using the binaries. However, as there are no binaries for PX4, we will have to build that from source. 
+Now that we already have ROS and Gazebo installed and since in this project we do not plan on making any modifications to PX4 and MAVROS, these can directly be installed using the binaries. However, as there are no binaries for PX4, we will have to build that from source.
 
 To install MAVROS(and the [GeographicLib](https://geographiclib.sourceforge.io/) dataset):
 
@@ -53,10 +53,10 @@ Now, it turns out that the instructions provided [here](https://dev.px4.io/en/si
 
 If all of this went well without any errors, we have PX4 and MAVROS on our system. To test whether it works, after sourcing the workspace, run
 
-```
+```bash
 roslaunch px4 mavros_posix_sitl.launch
 ```
 
 Ideally this launches Gazebo and a simulated Iris drone with MAVROS as below:
 
-![](../img/gazebo_iris.png)
+![gazebo_screenshot](../img/gazebo_iris.png)
