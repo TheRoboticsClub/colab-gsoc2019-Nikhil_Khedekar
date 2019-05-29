@@ -38,6 +38,9 @@ Now, it turns out that the instructions provided [here](https://dev.px4.io/en/si
     git clone https://github.com/PX4/sitl_gazebo.git
     cd Firmware
     git submodule update --init --recursive
+    cd ..
+    cd sitl_gazebo
+    git submodule update --init --recursive
     cd ../..
     ```
 
