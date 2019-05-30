@@ -11,7 +11,7 @@ As the project requires the knowledge of the usage of MAVROS and PX4, I built th
 
 ![Gazebo Screenshot](../img/gazebo_iris_close_up.png)
 
-Using the [MAVROS C++ documentation example](http://dev.px4.io/en/ros/mavros_offboard.html) and the [python integration tests](http://dev.px4.io/en/ros/mavros_offboard.html), I was able to write my own Python node commanding the position of an iris drone simulated in Gazebo as shown in the below video (click on the image):
+Using the [MAVROS C++ documentation example](http://dev.px4.io/en/ros/mavros_offboard.html) and the [python integration tests](http://dev.px4.io/en/ros/mavros_offboard.html), I was able to write my own Python node commanding the position of an iris drone simulated in Gazebo as shown in the below video (click the image to play):
 
 [![MAVROS basic position control in offboard mode](http://img.youtube.com/vi/BLH0iyANl1I/0.jpg)](http://www.youtube.com/watch?v=BLH0iyANl1I)
 
