@@ -105,6 +105,44 @@
   </xacro:mavlink_interface_macro>
   </xacro:if>
 
+  <xacro:camera_macro
+    namespace="${namespace}"
+    parent_link="base_link"
+    camera_suffix="frontal"
+    frame_rate="30.0"
+    horizontal_fov="1.047"
+    image_width="320"
+    image_height="240"
+    image_format="R8G8B8"
+    min_distance="0.1"
+    max_distance="100"
+    noise_mean="0.0"
+    noise_stddev="0.0007"
+    enable_visual="1"
+    >
+    <box size="0.01 0.01 0.01" />
+    <origin xyz="0.1 0 0" rpy="0 0 0"/>
+  </xacro:camera_macro>
+
+  <xacro:camera_macro
+    namespace="${namespace}"
+    parent_link="base_link"
+    camera_suffix="ventral"
+    frame_rate="30.0"
+    horizontal_fov="1.047"
+    image_width="320"
+    image_height="240"
+    image_format="R8G8B8"
+    min_distance="0.1"
+    max_distance="100"
+    noise_mean="0.0"
+    noise_stddev="0.0007"
+    enable_visual="1"
+    >
+    <box size="0.01 0.01 0.01" />
+    <origin xyz="0 0 -0.04" rpy="0 1.57079632679 0"/>
+  </xacro:camera_macro>
+
   <!-- Mount an ADIS16448 IMU. -->
   <xacro:imu_plugin_macro
     namespace="${namespace}"
