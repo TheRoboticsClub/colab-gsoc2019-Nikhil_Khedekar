@@ -18,6 +18,6 @@ This prompted me to create my own sdf file for both of these as incremental test
 
 ![Iris with Cameras Close-up](../img/iris_with_cameras.png)
 
-Hence, after going through all the different [launch files provided in PX4](https://github.com/PX4/Firmware/tree/master/launch), I created my own [launch file](https://github.com/TheRoboticsClub/colab-gsoc2019-Nikhil_Khedekar/blob/master/catkin_ws/src/drone_exercises/launch/mavros_px4_sitl.launch) that parses the 3DR Iris Xacro (with the newly added cameras) and launches it with MAVROS and PX4 SITL. This file shall be included in almost all other launch files. A video of the working code with the previous position controller (click the image to play):
+Hence, after going through all the different [launch files provided in PX4](https://github.com/PX4/Firmware/tree/master/launch), I created my own [launch file](https://github.com/TheRoboticsClub/colab-gsoc2019-Nikhil_Khedekar/blob/master/catkin_ws/src/drone_exercises/launch/mavros_px4_sitl.launch) that parses the [3DR Iris Xacro](https://github.com/TheRoboticsClub/colab-gsoc2019-Nikhil_Khedekar/blob/master/catkin_ws/src/drone_exercises/models/rotors_description/urdf/iris_base.xacro) (with the newly added cameras) and launches it with MAVROS and PX4 SITL. This file shall be included in almost all other launch files. A video of the working code with the previous position controller (click the image to play):
 
 [![Iris with Cameras](../img/cameras_addition.png)](http://www.youtube.com/watch?v=O2KT_7mCkpA)
