@@ -8,35 +8,18 @@ from geometry_msgs.msg import PoseStamped, Twist
 from mavros_msgs.msg import State
 from mavros_msgs.srv import CommandBool, CommandBoolRequest, SetMode, SetModeRequest, SetMavFrame, SetMavFrameRequest, CommandTOL, CommandTOLRequest
 
-# #!/usr/bin/env python
-
-# import rospy
-# from drone_wrapper import DroneWrapper
-
-# drone = DroneWrapper(True)
-# drone.set_vel_frame(8)
-# drone.takeoff(2)
-
-# for i in range(5):
-#     print 'Staying.....'
-#     rospy.sleep(1)
-
-# drone.land()
-
-# rospy.sleep(2)
-
 class DroneWrapper():
 	def state_cb(self, msg):
 		self.state = msg
-		# rospy.logdebug('State updated')
+		rospy.logdebug('State updated')
 
 	def pose_stamped_cb(self, msg):
 		self.pose_stamped = msg
-		# rospy.logdebug('Pose updated')
+		rospy.logdebug('Pose updated')
 	
 	def global_position_cb(self, msg):
 		self.global_position = msg
-		# rospy.logdebug('Global position updated)
+		rospy.logdebug('Global position updated')
 	
 	def stay_armed_stay_offboard_cb(self, event):
 		if self.state.mode != 'OFFBOARD':
@@ -50,7 +33,7 @@ class DroneWrapper():
 		req = CommandBoolRequest()
 		req.value = value
 		if self.arm_client(req).success:
-			rospy.logdebug('Arming/Disarming successful')
+			rospy.loginfo('Arming/Disarming successful')
 			return True
 		else:
 			rospy.logwarn('Arming/Disarming unsuccessful')
@@ -58,11 +41,11 @@ class DroneWrapper():
 		
 	def request_mode(self, mode = 'OFFBOARD'):
 		rospy.sleep(2)
-		rospy.logdebug('Current mode: %s', self.state.mode)
+		rospy.loginfo('Current mode: %s', self.state.mode)
 		req = SetModeRequest()
 		req.custom_mode = mode
 		if self.mode_client(req).mode_sent:
-			rospy.logdebug('Mode change request successful')
+			rospy.loginfo('Mode change request successful')
 			return True
 		else:
 			rospy.logwarn('Mode change request unsuccessful')
@@ -72,10 +55,10 @@ class DroneWrapper():
 		req = SetMavFrameRequest()
 		req.mav_frame = frame
 		if self.vel_frame_client(req).success:
-			rospy.logdebug('Velocity frame change successful')
+			rospy.loginfo('Velocity frame change successful')
 			return True
 		else:
-			rospy.logdebug('Velocity frame change unsuccessful')
+			rospy.logwarn('Velocity frame change unsuccessful')
 			return False
 
 	def set_cmd_vel(self, vx = 0, vy = 0, vz = 0, ax = 0, ay = 0, az = 0):
@@ -108,7 +91,7 @@ class DroneWrapper():
 		while True:
 			while not (self.state.armed and self.state.mode == 'OFFBOARD'):
 				self.rate.sleep()
-			rospy.logdebug('Sleeping 3 secs to confirm change')
+			rospy.loginfo('Sleeping 3 secs to confirm change')
 			rospy.sleep(3)
 			if self.state.mode == 'OFFBOARD':
 				break
@@ -116,7 +99,7 @@ class DroneWrapper():
 		rospy.loginfo('Taking off!!!')
 		rospy.sleep(3)
 		self.set_cmd_vel()
-			
+		
 		# Takeoff through position control
 		# self.set_cmd_pose(0,0,0,0)
 		# self.hold_cmd_pose()
