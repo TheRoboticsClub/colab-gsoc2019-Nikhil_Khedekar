@@ -5,11 +5,11 @@ import time
 from drone_wrapper import DroneWrapper
 
 def wait(secs):
-	start = rospy.Time.now()
-	while rospy.Time.now() - rospy.Duration(secs) < start:
+	end = rospy.Time.now() + rospy.Duration(secs)
+	while rospy.Time.now() < end:
 		rospy.sleep(1)
 
-drone = DroneWrapper(True)
+drone = DroneWrapper(verbose = False)
 
 
 print '***********************************Rectangle************************************'
