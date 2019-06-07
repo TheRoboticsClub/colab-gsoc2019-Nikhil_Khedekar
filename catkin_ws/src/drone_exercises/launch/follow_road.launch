@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- MAVROS posix SITL in the follow_road environment launch script -->
+    <!-- launches MAVROS, PX4 SITL, Gazebo environment, and spawns vehicle -->
+    <!-- This file includes the base mavros_px4_sitl.launch so as to allow for reusability -->
+
+    <!-- vehicle pose -->
+    <arg name="x" default="8"/>
+    <arg name="y" default="0"/>
+    <arg name="z" default="0.3"/>
+    <arg name="R" default="0"/>
+    <arg name="P" default="0"/>
+    <arg name="Y" default="1.57"/>
+
+    <arg name="world" default="$(find drone_exercises)/worlds/roadtextures.world"/>
+    
+    <include file="$(find drone_exercises)/launch/mavros_px4_sitl.launch">
+        <arg name="x" value="$(arg x)"/>
+        <arg name="y" value="$(arg y)"/>
+        <arg name="z" value="$(arg z)"/>
+        <arg name="R" value="$(arg R)"/>
+        <arg name="P" value="$(arg P)"/>
+        <arg name="Y" value="$(arg Y)"/>
+        <arg name="world" value="$(arg world)"/>
+    </include>
+</launch>
