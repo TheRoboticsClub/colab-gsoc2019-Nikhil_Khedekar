@@ -28,3 +28,5 @@ INFO  [commander] Takeoff detected
 WARN  [commander] Failsafe enabled: no RC and no offboard
 [ERROR] [1559755514.411656119, 823.892000000]: FCU: Failsafe enabled: no RC and no offboard
 ```
+
+I also found that if the same method of control persists throughout the execution, i.e. always use `cmd_vel` or always use `setpoint_position`, the drone is able to complete the trajectory. As a work-around to the above issue, I am using `cmd_vel` for the control throughout the mission.
