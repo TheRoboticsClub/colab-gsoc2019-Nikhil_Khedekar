@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import rospy
-from sensor_msgs.msg import NavSatFix
+from sensor_msgs.msg import NavSatFix, Image
 from geometry_msgs.msg import PoseStamped
 from mavros_msgs.msg import State, PositionTarget
 from mavros_msgs.srv import CommandBool, CommandBoolRequest, SetMode, SetModeRequest, CommandTOL, CommandTOLRequest
@@ -19,6 +19,14 @@ class DroneWrapper():
 		self.global_position = msg
 		rospy.logdebug('Global position updated')
 	
+	def cam_frontal_cb(self, msg):
+		self.frontal_image = msg
+		rospy.logdebug('Frontal image updated')
+	
+	def cam_ventral_cb(self, msg):
+		self.ventral_image = msg
+		rospy.logdebug('Ventral image updated')
+	
 	def stay_armed_stay_offboard_cb(self, event):
 		if self.state.mode != 'OFFBOARD':
 			if self.request_mode('OFFBOARD'):
@@ -26,6 +34,12 @@ class DroneWrapper():
 		elif not self.state.armed:
 			if self.arm(True):
 				rospy.loginfo("Vehicle Armed")
+			
+	def get_frontal_image(self):
+		return self.frontal_image
+	
+	def get_ventral_image(self):
+		return self.ventral_image
 			
 	def arm(self, value = True):
 		req = CommandBoolRequest()
@@ -117,5 +131,7 @@ class DroneWrapper():
 		rospy.Subscriber('mavros/state', State, self.state_cb)
 		rospy.Subscriber('mavros/local_position/pose', PoseStamped, self.pose_stamped_cb)
 		rospy.Subscriber('mavros/global_position/global', NavSatFix, self.global_position_cb)
+		rospy.Subscriber('iris/camera_frontal/image_raw', Image, self.cam_frontal_cb)
+		rospy.Subscriber('iris/camera_ventral/image_raw', Image, self.cam_ventral_cb)
 
 		self.setpoint_raw_publisher = rospy.Publisher('mavros/setpoint_raw/local', PositionTarget, queue_size = 1)
