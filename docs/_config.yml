@@ -104,7 +104,7 @@ social-network-links:
 # --- Web Statistics Section --- #
 
 # Fill in your Google Analytics gtag.js ID to track your website using gtag
-#gtag: ""
+gtag: "UA-142399643-1"
 
 # Fill in your Google Analytics ID to track your website using GA
 #google_analytics: ""
