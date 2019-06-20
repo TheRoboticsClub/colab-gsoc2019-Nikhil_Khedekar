@@ -44,7 +44,8 @@ def execute(event):
 	global drone
 	img_frontal = drone.get_frontal_image()
 	img_ventral = drone.get_ventral_image()
-	pass
+
+	# Insert your code here
 
 if __name__ == "__main__":
 	drone = DroneWrapper()

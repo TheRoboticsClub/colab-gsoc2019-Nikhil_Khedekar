@@ -1,9 +1,5 @@
 #!/usr/bin/env python
 
-###############################
-# This code is now deprecated. Please use the drone_wrapper package instead
-###############################
-
 import rospy
 import tf
 from sensor_msgs.msg import NavSatFix, Image
