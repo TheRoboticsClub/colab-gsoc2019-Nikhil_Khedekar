@@ -10,10 +10,10 @@ from sensor_msgs.msg import Image
 code_live_flag = False
 
 def gui_takeoff_cb(msg):
-	drone.takeoff()
-
-def gui_land_cb(msg):
-	drone.land()
+	if msg.data:
+		drone.takeoff()
+	else:
+		drone.land()
 
 def gui_play_stop_cb(msg):
 	global code_live_flag, code_live_timer
@@ -53,8 +53,8 @@ if __name__ == "__main__":
 	rospy.Subscriber('gui/play_stop', Bool, gui_play_stop_cb)
 	rospy.Subscriber('gui/alt_slider', Float64, gui_alt_slider_cb)
 	rospy.Subscriber('gui/rotation_dial', Float64, gui_rotation_dial_cb)
-	gui_filtered_img_pub = rospy.Publisher('interface/filtered_img', Image)
-	gui_threshed_img_pub = rospy.Publisher('interface/threshed_img', Image)
+	gui_filtered_img_pub = rospy.Publisher('interface/filtered_img', Image, queue_size = 1)
+	gui_threshed_img_pub = rospy.Publisher('interface/threshed_img', Image, queue_size = 1)
 	code_live_flag = False
 	code_live_timer = rospy.Timer(rospy.Duration(nsecs=50000000), execute)
 	code_live_timer.shutdown()

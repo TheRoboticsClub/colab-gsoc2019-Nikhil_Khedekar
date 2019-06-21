@@ -134,11 +134,11 @@ class DroneWrapper():
 		req.longitude = self.global_position.longitude
 		self.land_client(req)
 
-	def __init__(self, verbose = False):
+	def __init__(self, name = 'drone', verbose = False):
 		if verbose:
-			rospy.init_node('drone', log_level = rospy.DEBUG)
+			rospy.init_node(name, log_level = rospy.DEBUG)
 		else:
-			rospy.init_node('drone')
+			rospy.init_node(name)
 		
 		self.state = State()
 		self.pose_stamped = PoseStamped()

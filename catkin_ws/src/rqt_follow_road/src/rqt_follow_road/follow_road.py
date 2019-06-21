@@ -8,24 +8,13 @@ from python_qt_binding.QtWidgets import QWidget
 
 from std_msgs.msg import Bool, Float64
 from sensor_msgs.msg import Image
+from geometry_msgs.msg import PoseStamped
 
 class FollowRoad(Plugin):
 	def __init__(self, context):
 		super(FollowRoad, self).__init__(context)
 		# Give QObjects reasonable names
 		self.setObjectName('FollowRoad')
-
-		# Process standalone plugin command-line arguments
-		from argparse import ArgumentParser
-		parser = ArgumentParser()
-		# Add argument(s) to the parser.
-		parser.add_argument("-q", "--quiet", action="store_true",
-                      dest="quiet",
-                      help="Put plugin in silent mode")
-		args, unknowns = parser.parse_known_args(context.argv())
-		if not args.quiet:
-			print 'arguments: ', args
-			print 'unknowns: ', unknowns
 
 		# Create QWidget
 		self._widget = QWidget()
@@ -68,6 +57,7 @@ class FollowRoad(Plugin):
 		# Setup subs
 		rospy.Subscriber('interface/filtered_img', Image, self.filtered_img_cb)
 		rospy.Subscriber('interface/threshed_img', Image, self.threshed_img_cb)
+		rospy.Subscriber('mavros/local_position/pose', PoseStamped, self.pose_stamped_cb)
 
 	def shutdown_plugin(self):
 		# TODO unregister all publishers here
@@ -84,7 +74,7 @@ class FollowRoad(Plugin):
 		pass
 
 	def call_takeoff_land(self):
-		if(self.takeoff == True):
+		if self.takeoff == True:
 			self._widget.takeoffButton.setText("Take Off")
 			rospy.loginfo('Landing')
 			self.takeoff_pub.publish(Bool(False))
@@ -115,21 +105,30 @@ class FollowRoad(Plugin):
 		rospy.loginfo('Resetting environment - Not yet implemented')
 
 	def alt_slider_val_changed(self, value):
-		rospy.logdebug('Altitude slider value changed')
 		value = (1.0/(self._widget.altdSlider.maximum()/2)) * (value - (self._widget.altdSlider.maximum()/2))
-		self._widget.rotValue.setText('%.2f' % value)
+		self._widget.altdValue.setText('%.2f' % value)
+		rospy.logdebug('Altitude slider value changed to: %.2f', value)
 		self.alt_slider_pub.publish(Float64(value))
 
 	def rotation_val_changed(self, value):
-		rospy.loginfo('Rotational dial value changed')
 		value = (1.0/(self._widget.rotationDial.maximum()/2)) * (value - (self._widget.rotationDial.maximum()/2))
 		self._widget.rotValue.setText('%.2f' % value)
+		rospy.logdebug('Rotational dial value changed to: %.2f', value)
 		self.rotation_dial_pub.publish(Float64(value))
 
+	# Figure out how to use the rqt_image_view
 	def filtered_img_cb(self, msg):
 		pass
 
 	def threshed_img_cb(self, msg):
+		pass
+
+	def pose_stamped_cb(self, msg):
+		# self.XValue.setText('%.2f' % newX)
+        # self.YValue.setText('%.2f' % newY)
+        # self.cmdvel.setVX(-newY)
+        # self.cmdvel.setVY(-newX)
+        # self.cmdvel.sendVelocities()
 		pass
 
 
