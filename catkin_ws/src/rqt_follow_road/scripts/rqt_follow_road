@@ -2,8 +2,8 @@
 
 import sys
 
-from rqt_gui.main import Main
 from rqt_follow_road.follow_road import FollowRoad
+from rqt_gui.main import Main
 
 plugin = 'rqt_follow_road'
 main = Main(filename=plugin)
