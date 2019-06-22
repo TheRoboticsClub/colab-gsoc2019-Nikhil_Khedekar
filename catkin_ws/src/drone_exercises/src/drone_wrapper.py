@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 
-###############################
-# This code is now deprecated. Please use the drone_wrapper package instead
-###############################
-
 import rospy
 import tf
+import cv2
+from cv_bridge import CvBridge
 from sensor_msgs.msg import NavSatFix, Image
 from geometry_msgs.msg import PoseStamped
 from mavros_msgs.msg import State, PositionTarget
@@ -41,10 +39,10 @@ class DroneWrapper():
 				rospy.loginfo("Vehicle Armed")
 			
 	def get_frontal_image(self):
-		return self.frontal_image
+		return self.bridge.imgmsg_to_cv2(self.frontal_image)
 	
 	def get_ventral_image(self):
-		return self.ventral_image
+		return self.bridge.imgmsg_to_cv2(self.ventral_image)
 	
 	def get_position(self):
 		return self.pose_stamped.pose.position
@@ -146,6 +144,7 @@ class DroneWrapper():
 		self.setpoint_raw = PositionTarget()
 		self.setpoint_raw_flag = False
 		self.vz_factor = 0.4
+		self.bridge = CvBridge()
 		
 		self.setpoint_raw_timer = rospy.Timer(rospy.Duration(nsecs=50000000), self.repeat_setpoint_raw)
 		self.setpoint_raw_timer.shutdown()

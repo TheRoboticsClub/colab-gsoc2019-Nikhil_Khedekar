@@ -35,15 +35,18 @@ def gui_rotation_dial_cb(msg):
 	drone.set_cmd_vel(az = msg.data)
 
 def set_image_filtered(img):
-	gui_filtered_img_pub.publish(img)
+	gui_filtered_img_pub.publish(drone.bridge.cv2_to_imgmsg(img))
 
 def set_image_threshed(img):
-	gui_threshed_img_pub.publish(img)
+	gui_threshed_img_pub.publish(drone.bridge.cv2_to_imgmsg(img))
 
 def execute(event):
 	global drone
 	img_frontal = drone.get_frontal_image()
 	img_ventral = drone.get_ventral_image()
+	# Both the above images are cv2 images
+
+	set_image_filtered(img_frontal)
 
 	# Insert your code here
 
