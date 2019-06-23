@@ -26,9 +26,9 @@ class FollowRoad(Plugin):
 					  dest="quiet",
 					  help="Put plugin in silent mode")
 		args, unknowns = parser.parse_known_args(context.argv())
-		if not args.quiet:
-			print 'arguments: ', args
-			print 'unknowns: ', unknowns
+		# if not args.quiet:
+		# 	print 'arguments: ', args
+		# 	print 'unknowns: ', unknowns
 
 		# Create QWidget
 		self._widget = QWidget()
@@ -75,8 +75,8 @@ class FollowRoad(Plugin):
 		self.bridge = CvBridge()
 
 		# Add Subscibers
-		rospy.Subscriber('iris/camera_frontal/image_raw', Image, self.cam_frontal_cb)
-		rospy.Subscriber('iris/camera_ventral/image_raw', Image, self.cam_ventral_cb)
+		rospy.Subscriber('iris/cam_frontal/image_raw', Image, self.cam_frontal_cb)
+		rospy.Subscriber('iris/cam_ventral/image_raw', Image, self.cam_ventral_cb)
 		rospy.Subscriber('interface/filtered_img', Image, self.filtered_img_cb)
 		rospy.Subscriber('interface/threshed_img', Image, self.threshed_img_cb)
 
@@ -88,7 +88,7 @@ class FollowRoad(Plugin):
 		h, w, c = cv_img.shape
 		bytesPerLine = 3 * w
 		q_img = QImage(cv_img.data, w, h, bytesPerLine, QImage.Format_RGB888)
-		return QPixmap.fromImage(q_img)
+		return QPixmap.fromImage(q_img).scaled(320,240)
 
 	def cam_frontal_cb(self, msg):
 		self._widget.img_frontal.setPixmap(self.msg_to_pixmap(msg))

@@ -13,7 +13,7 @@
     <arg name="Y" default="1.57"/>
 
     <arg name="world" default="$(find drone_exercises)/worlds/roadtextures.world"/>
-
+    
     <include file="$(find drone_exercises)/launch/mavros_px4_sitl.launch">
         <arg name="x" value="$(arg x)"/>
         <arg name="y" value="$(arg y)"/>
@@ -23,6 +23,4 @@
         <arg name="Y" value="$(arg Y)"/>
         <arg name="world" value="$(arg world)"/>
     </include>
-    <node name="rqt_gui" pkg="rqt_gui" type="rqt_gui" respawn="false" output="screen" args="--perspective-file $(find drone_exercises)/perspectives/FollowRoad.perspective"/>
-    <node name="test" pkg="drone_exercises" type="play_python_file.sh" output="screen" args="$(find drone_exercises)/src/my_solution.py"/>
 </launch>
