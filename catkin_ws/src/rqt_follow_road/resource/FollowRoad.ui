@@ -384,7 +384,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Image_frontal</string>
+    <string>Waiting for images to be published by gazebo</string>
    </property>
   </widget>
   <widget class="QLabel" name="img_ventral">
@@ -397,7 +397,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Image_ventral</string>
+    <string>Waiting for Images to be published by gazebo</string>
    </property>
   </widget>
   <widget class="QLabel" name="img_filtered">
@@ -410,7 +410,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>filtered image</string>
+    <string>use set_image_filtered() to display here</string>
    </property>
   </widget>
   <widget class="QLabel" name="img_threshed">
@@ -423,7 +423,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>threshed image</string>
+    <string>use set_image_threshed() to display here</string>
    </property>
   </widget>
   <widget class="QTextEdit" name="term_out">

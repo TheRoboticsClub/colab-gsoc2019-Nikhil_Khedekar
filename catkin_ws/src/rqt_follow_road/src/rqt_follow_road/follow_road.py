@@ -11,6 +11,7 @@ from sensor_msgs.msg import Image
 import cv2
 from cv_bridge import CvBridge
 from std_msgs.msg import Bool, Float64
+from geometry_msgs.msg import PoseStamped
 
 class FollowRoad(Plugin):
 	def __init__(self, context):
@@ -79,6 +80,7 @@ class FollowRoad(Plugin):
 		rospy.Subscriber('iris/cam_ventral/image_raw', Image, self.cam_ventral_cb)
 		rospy.Subscriber('interface/filtered_img', Image, self.filtered_img_cb)
 		rospy.Subscriber('interface/threshed_img', Image, self.threshed_img_cb)
+		rospy.Subscriber('mavros/local_position/pose', PoseStamped, self.pose_stamped_cb)
 
 		# Add widget to the user interface
 		context.add_widget(self._widget)
@@ -101,6 +103,10 @@ class FollowRoad(Plugin):
 
 	def filtered_img_cb(self, msg):
 		self._widget.img_filtered.setPixmap(self.msg_to_pixmap(msg))
+	
+	def pose_stamped_cb(self, msg):
+		self._widget.XValue.setText('%.2f' % msg.pose.position.x)
+		self._widget.YValue.setText('%.2f' % msg.pose.position.y)
 
 	def call_takeoff_land(self):
 		if self.takeoff == True:
