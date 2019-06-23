@@ -45,10 +45,12 @@ def execute(event):
 	img_frontal = drone.get_frontal_image()
 	img_ventral = drone.get_ventral_image()
 	# Both the above images are cv2 images
+	################# Insert your code here #################################
 
 	set_image_filtered(img_frontal)
+	set_image_threshed(img_ventral)
 
-	# Insert your code here
+	#########################################################################
 
 if __name__ == "__main__":
 	drone = DroneWrapper()
