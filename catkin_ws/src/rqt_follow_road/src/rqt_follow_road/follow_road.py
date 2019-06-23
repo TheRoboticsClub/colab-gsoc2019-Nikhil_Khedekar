@@ -26,7 +26,7 @@ class FollowRoad(Plugin):
 		parser.add_argument("-q", "--quiet", action="store_true",
 					  dest="quiet",
 					  help="Put plugin in silent mode")
-		args, unknowns = parser.parse_known_args(context.argv())
+		# args, unknowns = parser.parse_known_args(context.argv())
 		# if not args.quiet:
 		# 	print 'arguments: ', args
 		# 	print 'unknowns: ', unknowns
@@ -87,7 +87,7 @@ class FollowRoad(Plugin):
 
 	def msg_to_pixmap(self, msg):
 		cv_img = self.bridge.imgmsg_to_cv2(msg)
-		h, w, c = cv_img.shape
+		h, w, _ = cv_img.shape
 		bytesPerLine = 3 * w
 		q_img = QImage(cv_img.data, w, h, bytesPerLine, QImage.Format_RGB888)
 		return QPixmap.fromImage(q_img).scaled(320,240)
