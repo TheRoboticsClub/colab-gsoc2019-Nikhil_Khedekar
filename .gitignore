@@ -7,3 +7,5 @@ catkin_ws/src/Firmware
 catkin_ws/src/sitl_gazebo
 catkin_ws/.catkin_tools
 *.pyc
+.vscode/
+catkin_ws/src/catkin_create_rqt
