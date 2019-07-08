@@ -1,0 +1,3 @@
+[submodule "catkin_ws/src/drones"]
+	path = catkin_ws/src/drones
+	url = git@github.com:JdeRobot/drones.git
