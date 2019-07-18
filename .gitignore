@@ -9,3 +9,4 @@ catkin_ws/.catkin_tools
 *.pyc
 .vscode/
 catkin_ws/src/catkin_create_rqt
+catkin_ws/src/bloom_test
