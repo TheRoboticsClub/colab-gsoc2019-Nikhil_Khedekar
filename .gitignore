@@ -4,7 +4,7 @@ catkin_ws/build
 catkin_ws/devel
 catkin_ws/logs
 catkin_ws/src/Firmware
-catkin_ws/src/sitl_gazebo
+catkin_ws/src/mavlink_sitl_gazebo
 catkin_ws/.catkin_tools
 *.pyc
 .vscode/
