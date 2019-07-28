@@ -4,3 +4,7 @@
 [submodule "catkin_ws/src/assets"]
 	path = catkin_ws/src/assets
 	url = git@github.com:JdeRobot/assets.git
+[submodule "catkin_ws/src/ground_robots"]
+	path = catkin_ws/src/ground_robots
+	url = git@github.com:JdeRobot/ground_robots.git
+	branch = master
